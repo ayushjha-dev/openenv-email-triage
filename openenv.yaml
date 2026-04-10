@@ -1,0 +1,47 @@
+name: openenv-email-triage
+version: "1.0.0"
+description: OpenEnv Email Triage Environment - AI-Powered Email Triage Simulation
+author: "OpenEnv Team"
+license: MIT
+
+environment:
+  type: email-triage
+  domain: productivity
+  
+tasks:
+  - id: task1
+    name: Basic Email Classification
+    difficulty: easy
+    description: Classify 5 emails into correct categories
+    grader_enabled: true
+    
+  - id: task2
+    name: Classification and Prioritization
+    difficulty: medium
+    description: Classify and prioritize 10 emails
+    grader_enabled: true
+    
+  - id: task3
+    name: Full Email Triage
+    difficulty: hard
+    description: Handle 15 complex emails with full triage actions
+    grader_enabled: true
+
+actions:
+  - CLASSIFY
+  - PRIORITIZE
+  - REPLY_PLAN
+  - ESCALATE
+  - ARCHIVE
+  - DEFER
+  - DONE
+
+scoring:
+  easy: "0.8-1.0"
+  medium: "0.6-0.8"
+  hard: "0.4-0.65"
+
+deployment:
+  platform: huggingface-spaces
+  runtime: docker
+  port: 7860
