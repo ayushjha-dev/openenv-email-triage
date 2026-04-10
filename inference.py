@@ -26,7 +26,7 @@ LOCAL_IMAGE_NAME = os.getenv("LOCAL_IMAGE_NAME") or os.getenv("IMAGE_NAME")
 
 # Environment runtime settings.
 ENV_URL = os.getenv("ENV_URL", "http://localhost:7860").rstrip("/")
-TASK_NAME = os.getenv("TASK_NAME", "task1")
+TASK_NAME = os.getenv("TASK_NAME", "all")
 BENCHMARK = os.getenv("BENCHMARK", "email-triage")
 MAX_STEPS = int(os.getenv("MAX_STEPS", "100"))
 TEMPERATURE = float(os.getenv("TEMPERATURE", "0.2"))
@@ -279,10 +279,15 @@ def run_episode(task_id: str) -> None:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Run one OpenEnv email-triage episode")
-    parser.add_argument("--task", type=str, default=TASK_NAME, help="Task id (default from TASK_NAME)")
+    parser = argparse.ArgumentParser(description="Run OpenEnv email-triage episode")
+    parser.add_argument("--task", type=str, default=TASK_NAME, help="Task id (default from TASK_NAME) or 'all' to run all tasks")
     args = parser.parse_args()
-    run_episode(args.task)
+    
+    if args.task == "all":
+        for task in ["task1", "task2", "task3"]:
+            run_episode(task)
+    else:
+        run_episode(args.task)
 
 
 if __name__ == "__main__":
